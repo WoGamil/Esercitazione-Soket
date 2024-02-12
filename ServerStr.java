@@ -3,24 +3,24 @@ import java.net.*;
 import java.util.*;
 
 public class ServerStr {
-    ServerSocket server null;
-    Socket client null;
-    String stringaRicevuta null;
-    String stringaModificata null;
+    ServerSocket server = null;
+    Socket client = null;
+    String stringaRicevuta = null;
+    String stringaModificata = null;
     BufferedReader inDalClient;
-    DataautputStream outVersoClient;
+    DataOutputStream outVersoClient;
 
     public Socket attendi() {
         try {
             System.out.println("1 SERVER partito in esecuzione...");
             // crno un server sulis porta 6709.
-            server new ServerSocket (6789):
+            server = new ServerSocket (6789);
             // rimane in attesa di un client
-            client server.accept();
+            client = server.accept();
             // chiudo il server per inibice altri client
             server.close();
             //azzocio due oggetti al rocket del client per effettuare la scrittura e la lettura inbalclient new BufferedReader(new InputStreamReader (client.getInputStream()));
-            outVersoClient new DatabutputStream(client.getOutputStream());
+            outVersoClient = new DataOutputStream(client.getOutputStream());
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -34,12 +34,12 @@ public class ServerStr {
         try {
             // rimango in attesa della riga trasnmessa dal client
             System.out.println("3 benvenuto client, scrivi una frase e la trasformo in maiuscolo. Attendo...");
-            stringaRicevuta inDalClient.readLine();
+            stringaRicevuta = inDalClient.readLine();
             System.out.println("6 ricevuta la stringa dal cliente: "+stringaRicevuta);
             //la modifico e la rispedisco al client
-            stringaModificata-stringaRicevuta. toUpperCase();
+            stringaModificata = stringaRicevuta. toUpperCase();
             System.out.println("7 invio la stringa modificata al client ...");
-            outVersoClient.writeBytes(stringallodificata+'\n');
+            outVersoClient.writeBytes(stringaModificata+'\n');
             //termina elaborazione sul server chiudo la connessione del client System.out.println("9 SERVER: fine elaborazione ... buona notte!");
             client.close();
         }

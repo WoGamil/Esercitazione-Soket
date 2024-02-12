@@ -2,8 +2,8 @@ import java.io.*;
 import java.net.*;
 
 public class ClientStr {
-    String nomeServer "localhost";
-    int portaServer 6789;
+    String nomeServer = "localhost";
+    int portaServer = 6789;
     Socket miosocket;
     BufferedReader tastiera;
     String stringaUtente;
@@ -17,7 +17,7 @@ public class ClientStr {
             // per l'input da tastiera
             tastiera = new BufferedReader(new InputStreamReader(System.in));
             // creo un socket
-            aiosocket = new Socket(nomeServer, portaserver);
+            miosocket = new Socket(nomeServer, portaServer);
             //miosocket new Socket(InetAddress.getLocalHost(), 6789);
             // associo due oggetti al socket per effettuare la scrittura e la lettura outVersoserver new DataOutputStream(miosocket.getOutputStream());
             inDalServer = new BufferedReader(new InputStreamReader (miosocket.getInputStream()));
@@ -36,12 +36,13 @@ public class ClientStr {
     public void comunica() {
         // leggo una rige
         try {
-            System.out.println("4 inserisci la stringa da trasmettere al server:"+'\n'); stringaUtente tastiera.readLine();
+            System.out.println("4 inserisci la stringa da trasmettere al server:"+'\n');
+            stringaUtente = tastiera.readLine();
             //la spedisco al server
             System.out.println("5 invio la stringa al server e attendo...");
             outVersoServer.writeBytes(stringaUtente+'\n');
             //leggo la risposta dal server
-            stringaRicevutaDalServer-inDalServer.readLine();
+            stringaRicevutaDalServer = inDalServer.readLine();
             System.out.println("8 risposta dal server "+'\n'+stringaRicevutaDalServer);
             // chiudo la connessione
             System.out.println("9 CLIENT: termina elaborazione e chiude connessione" );
@@ -56,7 +57,7 @@ public class ClientStr {
 }
 
 public static void main(String args[]) {
-    ClientStr cliente new ClientStr();
-    cliente.comnetti();
+    ClientStr cliente = new ClientStr();
+    cliente.connetti();
     cliente.comunica();
 }
